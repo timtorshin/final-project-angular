@@ -1,15 +1,17 @@
 <h1 mat-dialog-title>Информация о пользователе</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="outline">
-    <mat-label>ФИО</mat-label>
-    <input matInput placeholder="Фамилия Имя Отчество"/>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Адрес</mat-label>
-    <input matInput placeholder="Адрес"/>
-  </mat-form-field>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+      <mat-label>ФИО</mat-label>
+      <input formControlName="userInitials" matInput placeholder="Фамилия Имя Отчество"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Адрес</mat-label>
+      <input formControlName="userAddress" matInput placeholder="Адрес"/>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-action [align]="'end'">
   <button mat-raised-button color="warn" mat-dialog-close>Закрыть</button>
-  <button mat-raised-button color="primary" style="margin-left: 6px;">Сохранить</button>
+  <button mat-raised-button color="primary" style="margin-left: 6px;" (click)="addUser()">Сохранить</button>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog',
@@ -6,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  constructor() {}
+  userForm!: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.userForm = this.formBuilder.group({
+      userInitials: ['', Validators.required],
+      userAddress: ['', Validators.required]
+    });
+  }
+
+  addUser() {
+    console.log(this.userForm.value);
+  }
 }
