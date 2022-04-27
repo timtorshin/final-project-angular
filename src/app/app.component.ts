@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from './dialog/dialog.component';
@@ -11,7 +11,7 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  displayedColumns: string[] = ['userInitials', 'userAddress'];
+  displayedColumns: string[] = ['userInitials', 'userAddress', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogComponent, {
       width: '30%'
+    }).afterClosed().subscribe(value => {
+      if (value === 'save') {
+        this.getAllUsers();
+      }
     });
   }
 
@@ -37,6 +41,30 @@ export class AppComponent implements OnInit {
         next: (res) => {
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.sort = this.sort;
+        },
+        error: () => {
+          alert('Что-то пошло не так!');
+        }
+      });
+  }
+
+  editUser(row: any) {
+    this.dialog.open(DialogComponent, {
+      width: '30%',
+      data: row
+    }).afterClosed().subscribe(value => {
+      if (value === 'update') {
+        this.getAllUsers();
+      }
+    });
+  }
+
+  deleteUser(id: number) {
+    this.api.deleteUser(id)
+      .subscribe({
+        next: (res) => {
+          alert('Пользователь успешно удалён!');
+          this.getAllUsers();
         },
         error: () => {
           alert('Что-то пошло не так!');
