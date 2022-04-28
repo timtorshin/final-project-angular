@@ -3,11 +3,15 @@
   <form [formGroup]="userForm">
     <mat-form-field appearance="outline">
       <mat-label>ФИО</mat-label>
-      <input formControlName="userInitials" matInput placeholder="Фамилия Имя Отчество"/>
+      <ngx-dadata [config]="configFio" id="fio" formControlName="userInitials">
+        <input formControlName="userInitials" matInput placeholder="Фамилия Имя Отчество"/>
+      </ngx-dadata>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Адрес</mat-label>
-      <input formControlName="userAddress" matInput placeholder="Адрес"/>
+      <ngx-dadata [config]="configAddress" id="address" formControlName="userAddress">
+        <input formControlName="userAddress" matInput placeholder="Адрес"/>
+      </ngx-dadata>
     </mat-form-field>
   </form>
 </div>
