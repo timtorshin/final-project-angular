@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { timer } from 'rxjs';
+import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { DialogComponent } from './dialog/dialog.component';
 import { ApiService } from './services/api.service';
 
@@ -10,19 +13,36 @@ import { ApiService } from './services/api.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['userInitials', 'userAddress', 'action'];
   dataSource!: MatTableDataSource<any>;
+  loading = false;
 
   @ViewChild(MatSort) sort!: MatSort;
 
+  @ViewChild(CdkVirtualScrollViewport) scroller!: CdkVirtualScrollViewport;
+
   constructor(
     private dialog: MatDialog,
-    private api: ApiService
+    private api: ApiService,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
+  }
+
+  ngAfterViewInit(): void {
+    this.scroller.elementScrolled().pipe(
+      map(() => this.scroller.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1, y2]) => (y2 < y1) && (y2 < 96)),
+      throttleTime(200)
+    ).subscribe(() => {
+      this.ngZone.run(() => {
+        this.getAllUsers();
+      });
+    });
   }
 
   openDialog() {
@@ -46,6 +66,11 @@ export class AppComponent implements OnInit {
           alert('Что-то пошло не так!');
         }
       });
+
+    this.loading = true;
+    timer(5000).subscribe(() => {
+      this.loading = false;
+    });
   }
 
   editUser(row: any) {

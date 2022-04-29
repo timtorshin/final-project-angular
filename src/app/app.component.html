@@ -34,10 +34,15 @@
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">Нет данных</td>
-        </tr>
+        <cdk-virtual-scroll-viewport #scroller [itemSize]="48">
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Нет данных</td>
+          </tr>
+          <div class="spinner-item" *ngIf="loading">
+            <mat-progress-spinner [mode]="'indeterminate'" [diameter]="50"></mat-progress-spinner>
+          </div>
+        </cdk-virtual-scroll-viewport>
       </table>
     </div>
   </div>
