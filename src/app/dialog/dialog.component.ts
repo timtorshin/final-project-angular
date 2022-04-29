@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DadataConfig, DadataType } from '@kolkov/ngx-dadata';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -11,6 +12,16 @@ import { ApiService } from '../services/api.service';
 export class DialogComponent implements OnInit {
   userForm!: FormGroup;
   actionButton: string = 'Сохранить';
+
+  configAddress: DadataConfig = {
+    apiKey: '2e51c5fbc1a60bd48face95951108560bf03f7d9',
+    type: DadataType.address,
+  };
+
+  configFio: DadataConfig = {
+    apiKey: '2e51c5fbc1a60bd48face95951108560bf03f7d9',
+    type: DadataType.fio,
+  };
 
   constructor(
     private formBuilder: FormBuilder,

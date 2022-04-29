@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
+import { NgxDadataModule } from '@kolkov/ngx-dadata';
 
 import { AppComponent } from './app.component';
 import { DialogComponent } from './dialog/dialog.component';
@@ -38,7 +39,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatSortModule,
     ScrollingModule,
-    TableVirtualScrollModule
+    TableVirtualScrollModule,
+    NgxDadataModule
   ],
   providers: [],
   bootstrap: [AppComponent]
