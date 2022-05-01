@@ -24,3 +24,29 @@ table {
 .wrapper {
   height: 75vh;
 }
+
+@media screen and (max-width: 1064px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 808px) {
+  .container {
+    max-width: 375px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  mat-toolbar {
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
+    padding-top: 10px;
+    padding-bottom: 26px;
+  }
+
+  .container {
+    max-width: 300px;
+  }
+}
