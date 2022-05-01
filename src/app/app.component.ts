@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(DialogComponent, {
-      width: '30%'
+      panelClass: ['dialog-responsive']
     }).afterClosed().subscribe(value => {
       if (value === 'save') {
         this.getAllUsers();
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 
   editUser(row: any) {
     this.dialog.open(DialogComponent, {
-      width: '30%',
+      panelClass: ['dialog-responsive'],
       data: row
     }).afterClosed().subscribe(value => {
       if (value === 'update') {

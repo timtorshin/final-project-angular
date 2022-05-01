@@ -15,7 +15,7 @@
     </mat-form-field>
   </form>
 </div>
-<div mat-dialog-action [align]="'end'">
+<div class="button-container" mat-dialog-action>
   <button mat-raised-button color="warn" mat-dialog-close>Закрыть</button>
-  <button mat-raised-button color="primary" style="margin-left: 6px;" (click)="addUser()">{{ actionButton }}</button>
+  <button mat-raised-button color="primary" class="save-button" (click)="addUser()">{{ actionButton }}</button>
 </div>
