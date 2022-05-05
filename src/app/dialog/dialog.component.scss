@@ -1,0 +1,25 @@
+mat-form-field {
+  width: 100%;
+}
+
+.button-container {
+  text-align: end;
+}
+
+.save-button {
+  margin-left: 6px;
+}
+
+@media screen and (max-width: 808px) {
+  .button-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  .save-button {
+    margin-left: 0;
+  }
+}

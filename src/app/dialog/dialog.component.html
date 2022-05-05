@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Информация о пользователе</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+      <mat-label>ФИО</mat-label>
+      <ngx-dadata [config]="configFio" id="fio" formControlName="userInitials">
+        <input formControlName="userInitials" matInput placeholder="Фамилия Имя Отчество"/>
+      </ngx-dadata>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Адрес</mat-label>
+      <ngx-dadata [config]="configAddress" id="address" formControlName="userAddress">
+        <input formControlName="userAddress" matInput placeholder="Адрес"/>
+      </ngx-dadata>
+    </mat-form-field>
+  </form>
+</div>
+<div class="button-container" mat-dialog-action>
+  <button mat-raised-button color="warn" mat-dialog-close>Закрыть</button>
+  <button mat-raised-button color="primary" class="save-button" (click)="addUser()">{{ actionButton }}</button>
+</div>

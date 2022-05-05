@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 html, body {
   height: 100%;
 }
@@ -5,4 +7,26 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.dialog-responsive {
+  width: 36%;
+}
+
+@media screen and (max-width: 1064px) {
+  .dialog-responsive {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 808px) {
+  .dialog-responsive {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .dialog-responsive {
+    width: 80%;
+  }
 }
